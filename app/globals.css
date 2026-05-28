@@ -1,26 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2328;
+  --border-color: #d1d5db;
+  --code-bg: #f6f8fa;
+  --accent-green: #1a7f37;
+  --accent-blue: #0969da;
+  --accent-yellow: #9a6700;
+  --timeline-line: #d1d5db;
+  --step-hover: #f0f4f8;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+  --color-github-green: var(--accent-green);
+  --color-github-blue: var(--accent-blue);
+  --color-github-yellow: var(--accent-yellow);
+  --color-code-bg: var(--code-bg);
+  --color-border-github: var(--border-color);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border-color);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'SF Mono', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+  font-size: 0.875em;
+}
+
+/* Timeline connector line */
+.timeline-connector {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--timeline-line);
+}
+
+@media (min-width: 768px) {
+  .timeline-connector {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Copy button flash animation */
+@keyframes copyFlash {
+  0% { background-color: var(--accent-green); color: white; }
+  100% { background-color: transparent; color: inherit; }
+}
+
+.copy-flash {
+  animation: copyFlash 0.8s ease-out;
+}
+
+/* Subtle hover lift for cards */
+.step-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Checkbox animation */
+@keyframes checkPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.checkbox-pop {
+  animation: checkPop 0.2s ease-out;
+}
+
+/* Pulse for live preview */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(9, 105, 218, 0.2); }
+  50% { box-shadow: 0 0 0 8px rgba(9, 105, 218, 0); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b0b7bf;
 }
