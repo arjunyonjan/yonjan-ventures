@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -23,7 +23,7 @@ export default function AICursorSetupPage() {
           <Link href="/notes" className="text-gray-500 hover:text-gray-900">
             <ChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="text-xl font-bold">🤖 VS Code AI Agent + Cursor Setup + Local + Cloud</h1>
+          <h1 className="text-xl font-bold">🤖 VS Code AI Agent + Cursor Setup + Local + Gemma Cloud</h1>
         </div>
       </header>
       <main className="max-w-4xl mx-auto px-4 py-8">
@@ -80,20 +80,34 @@ export default function AICursorSetupPage() {
               <div className="mt-3 rounded-lg border overflow-hidden">
                 <div className="flex items-center justify-between px-3 py-2 bg-gray-50 border-b">
                   <span className="text-xs font-mono text-gray-600">yaml</span>
-                  <button onClick={() => copyToClipboard(`models:
-  - title: Qwen Coder (Ollama)
+                  <button onClick={() => copyToClipboard(`name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - name: Qwen 2.5 Coder 7B
     provider: ollama
-    model: qwen2.5-coder:7b
+    model: qwen2.5-coder:7b-instruct-q4_K_M
     apiBase: http://localhost:11434
-  - title: DeepSeek (API)
-    provider: openai
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: DeepSeek Coder
+    provider: openai  # ← FIXED: DeepSeek uses OpenAI provider
     model: deepseek-chat
-    apiKey: sk-your-deepseek-key
+    apiKey: sk-a22b92f09ad
     apiBase: https://api.deepseek.com/v1
-tabAutocompleteModel:
-  title: Qwen Coder Autocomplete
-  provider: ollama
-  model: qwen2.5-coder:1.5b
+
+  - name: Gemma 4 Cloud 31B  # ← FIXED: 'name' not 'title'
+    provider: ollama
+    model: gemma4:31b-cloud
+    apiBase: http://localhost:11434
+    roles: [chat, edit, apply]
+    capabilities: [tool_use]
+    requestOptions:
+      extraBodyProperties:
+        think: false
 `, "config")} className="flex items-center gap-1 text-xs px-2 py-1 rounded hover:bg-gray-200">
                     {copied["config"] ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                     {copied["config"] ? "Copied!" : "Copy"}
@@ -101,20 +115,34 @@ tabAutocompleteModel:
                 </div>
                 <pre className="p-4 bg-gray-50 overflow-x-auto">
                   <code className="text-sm font-mono whitespace-pre">
-{`models:
-  - title: Qwen Coder (Ollama)
+{`name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - name: Qwen 2.5 Coder 7B
     provider: ollama
-    model: qwen2.5-coder:7b
+    model: qwen2.5-coder:7b-instruct-q4_K_M
     apiBase: http://localhost:11434
-  - title: DeepSeek (API)
-    provider: openai
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: DeepSeek Coder
+    provider: openai  # ← FIXED: DeepSeek uses OpenAI provider
     model: deepseek-chat
-    apiKey: sk-your-deepseek-key
+    apiKey: sk-a22b92f09adf40e1803d798
     apiBase: https://api.deepseek.com/v1
-tabAutocompleteModel:
-  title: Qwen Coder Autocomplete
-  provider: ollama
-  model: qwen2.5-coder:1.5b
+
+  - name: Gemma 4 Cloud 31B  # ← FIXED: 'name' not 'title'
+    provider: ollama
+    model: gemma4:31b-cloud
+    apiBase: http://localhost:11434
+    roles: [chat, edit, apply]
+    capabilities: [tool_use]
+    requestOptions:
+      extraBodyProperties:
+        think: false
 `}
                   </code>
                 </pre>

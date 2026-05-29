@@ -1,4 +1,4 @@
-export default function NotesIndexPage() {
+﻿export default function NotesIndexPage() {
   return (
     <div className="min-h-screen bg-white p-8">
       <div className="max-w-4xl mx-auto">

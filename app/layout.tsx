@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Sidebar } from "@/components/Sidebar";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "3D Village in 10 Minutes — Blender + AI to Web",
-  description: "From prompt to embedded 3D model — no experience needed. Follow the timeline, check off steps as you go.",
+  title: "Yonjan Ventures - AI + 3D Development",
+  description: "AI-powered development tutorials and tools",
 };
 
 export default function RootLayout({
@@ -23,11 +25,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
+      <body className="min-h-full flex flex-col">
+        <div className="flex flex-1 min-h-0">
+          <Sidebar />
+          <div className="flex-1 flex flex-col min-h-screen overflow-x-auto">
+            <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b">
+              <div className="px-4 sm:px-6 py-3">
+                <Breadcrumbs />
+              </div>
+            </header>
+            <main className="flex-1">{children}</main>
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
