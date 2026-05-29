@@ -65,8 +65,25 @@ Include a progress bar that updates from a `Set<number>` of completed step IDs.
 ### 2. Hero Section
 
 - Title + subtitle with GitHub green/blue color coding
-- Inline SVG illustration (not `<Image>`) for instant render, no asset files needed
-- Inline SVGs should use `viewBox`, `fill="none"`, and Lucide-style `w-5 h-5` icon sizing
+- **Inline SVG illustration** (not `<Image>`) for instant render, no asset files needed
+- **Can also include real images** from `/public/images/` using `next/image` alongside the SVG for GLB preview screenshots. Stack SVG on top, images below in a responsive grid:
+
+```tsx
+{/* SVG illustration */}
+<div className="mt-8 max-w-lg mx-auto">
+  <HeroIllustration />
+</div>
+
+{/* Real reference images */}
+<div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+  <div className="relative rounded-xl border border-border-github overflow-hidden">
+    <Image src="/images/3d-village-one.png" alt="..." width={480} height={360} priority />
+    <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-mono">
+      view 1 — village.glb
+    </div>
+  </div>
+</div>
+```
 
 ### 3. Timeline Steps
 
