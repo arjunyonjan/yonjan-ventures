@@ -23,7 +23,7 @@ export default function AICursorSetupPage() {
           <Link href="/notes" className="text-gray-500 hover:text-gray-900">
             <ChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="text-xl font-bold">AI Agent + Cursor Setup</h1>
+          <h1 className="text-xl font-bold">🤖 VS Code AI Agent + Cursor Setup + Local + Cloud</h1>
         </div>
       </header>
       <main className="max-w-4xl mx-auto px-4 py-8">
