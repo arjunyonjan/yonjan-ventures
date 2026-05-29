@@ -5,12 +5,16 @@ import Link from "next/link";
 import { ChevronLeft, Copy, Check, Terminal, Sparkles, Cpu } from "lucide-react";
 
 export default function AICursorSetupPage() {
-  const [copied, setCopied] = useState({});
-  const copyToClipboard = (text, key) => {
-    navigator.clipboard.writeText(text);
-    setCopied({ [key]: true });
-    setTimeout(() => setCopied({}), 2000);
-  };
+  const [copied, setCopied] = useState<Record<string, boolean>>({});
+  const copyToClipboard = async (text: string, key: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    setCopied((prev) => ({ ...prev, [key]: true }));
+    setTimeout(() => setCopied((prev) => ({ ...prev, [key]: false })), 2000);
+  } catch (err) {
+    console.error("Failed to copy:", err);
+  }
+};
 
   return (
     <div className="min-h-screen bg-white">
