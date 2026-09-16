@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plasma Cutter DIY — Surgical Wiring Guide | YonjanLabs</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Geist',system-ui,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.7}
+.c{max-width:900px;margin:0 auto;padding:20px}
+h1{color:#00ff88;font-size:2.2em;margin:30px 0 10px;border-bottom:2px solid #00ff88;padding-bottom:10px}
+h2{color:#00ccff;font-size:1.5em;margin:25px 0 10px}
+h3{color:#ffaa00;font-size:1.2em;margin:20px 0 8px}
+table{width:100%;border-collapse:collapse;margin:15px 0}
+th{background:#1a1a2e;color:#00ff88;padding:12px;text-align:left;border:1px solid #333}
+td{padding:10px 12px;border:1px solid #333}
+tr:nth-child(even){background:#111}
+.pb{background:#1a1a2e;border:1px solid #00ff88;border-radius:8px;padding:15px;margin:15px 0;position:relative}
+.pb pre{background:#0d0d1a;padding:12px;border-radius:4px;overflow-x:auto;font-size:.9em;color:#aaffcc}
+.cb{position:absolute;top:10px;right:10px;background:#00ff88;color:#000;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-weight:bold}
+.cb:hover{background:#00cc66}
+.w{background:#331100;border-left:4px solid #ff4400;padding:15px;margin:15px 0}
+.w strong{color:#ff4400}
+.toc{background:#111;border:1px solid #333;border-radius:8px;padding:20px;margin:20px 0}
+.toc a{color:#00ccff;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.s{margin:40px 0;padding-top:20px;border-top:1px solid #222}
+.ft{text-align:center;margin-top:50px;padding:20px;color:#666;border-top:1px solid #222}
+</style>
+</head>
+<body>
+<div class="c">
+<h1>Plasma Cutter DIY — Surgical Wiring Guide</h1>
+<p><strong>Scrap TIG → Plasma Cutter Conversion</strong><br>Yonjan Ventures | YonjanLabs | 2026-09-16</p>
+
+<div class="toc">
+<h3>Contents</h3>
+<p><a href="#theory">Theory — How Plasma Cutting Works</a></p>
+<p><a href="#reuse">What to Reuse From Dead TIG Welders</a></p>
+<p><a href="#parts">Parts to Buy — China Prices</a></p>
+<p><a href="#wiring">Surgical Wiring — Exact Connections</a></p>
+<p><a href="#soldering">Soldering — Power Electronics Specific</a></p>
+<p><a href="#safety">Safety — Non Negotiable</a></p>
+<p><a href="#scrap">Where to Find Scrap in Kathmandu</a></p>
+<p><a href="#prompts">AI Image Prompts — Copy and Generate</a></p>
+</div>
+
+<div class="s" id="theory">
+<h2>Theory — How Plasma Cutting Works</h2>
+<p>Plasma cutting is TIG welding with compressed air doing the cutting.</p>
+<table>
+<tr><th>Component</th><th>TIG Welder</th><th>Plasma Cutter</th></tr>
+<tr><td>Arc creation</td><td>HF start or touch start</td><td>HF pilot arc</td></tr>
+<tr><td>Gas</td><td>Argon/helium (shielding)</td><td>Compressed air (cutting medium)</td></tr>
+<tr><td>Electrode</td><td>Tungsten (non-consumable)</td><td>Hafnium (consumed over time)</td></tr>
+<tr><td>Nozzle</td><td>Open cup (gas dispersal)</td><td>Constricted hole (arc concentration)</td></tr>
+<tr><td>Purpose</td><td>Weld metal together</td><td>Cut metal apart</td></tr>
+<tr><td>Air speed</td><td>Low flow</td><td>60-80 PSI high velocity</td></tr>
+</table>
+<p><strong>Key insight:</strong> The nozzle constriction is what makes plasma. Without it, you just get a hot flame. The HF board is the same in both TIG and plasma — only the torch design differs.</p>
+</div>
+
+<div class="s" id="reuse">
+<h2>What to Reuse From Dead TIG Welders</h2>
+<table>
+<tr><th>TIG Part</th><th>Reuse?</th><th>Value</th><th>Notes</th></tr>
+<tr><td>Transformer</td><td>YES</td><td>High</td><td>Power supply backbone</td></tr>
+<tr><td>Rectifier</td><td>YES</td><td>High</td><td>AC to DC conversion</td></tr>
+<tr><td>HF start circuit</td><td>YES</td><td>Critical</td><td>Arc initiation</td></tr>
+<tr><td>Gas solenoid</td><td>YES</td><td>Medium</td><td>Repurpose for air control</td></tr>
+<tr><td>Cables/ground clamp</td><td>YES</td><td>Medium</td><td>Same work piece connection</td></tr>
+<tr><td>TIG torch</td><td>NO</td><td>—</td><td>Wrong design, no constriction</td></tr>
+<tr><td>Chassis/enclosure</td><td>YES</td><td>Medium</td><td>Houses the build</td></tr>
+</table>
+</div>
+
+<div class="s" id="parts">
+<h2>Parts to Buy — China Prices</h2>
+<table>
+<tr><th>Part</th><th>Price (NPR)</th><th>Price (USD)</th><th>Notes</th></tr>
+<tr><td>HF start board (LGK type)</td><td>Rs. 945 - 3,194</td><td> - 3</td><td>Pilot arc + ignition</td></tr>
+<tr><td>Full plasma control board (IGBT)</td><td>Rs. 3,145 - 5,314</td><td>3 - 8</td><td>Complete with air control</td></tr>
+<tr><td>IGBT main board (LGK100/120)</td><td>Rs. 4,499 - 5,093</td><td>3 - 8</td><td>Built-in air pump</td></tr>
+<tr><td>HF coil only (15KV)</td><td>Rs. 274</td><td></td><td>For scratch builds</td></tr>
+<tr><td>Arc ignition module</td><td>Rs. 92 - 275</td><td>/data/data/com.termux/files/usr/bin/bash.70 - </td><td>Budget HF pulse</td></tr>
+<tr><td>Plasma torch head</td><td>Rs. 4,000 - 8,000</td><td>0 - 0</td><td>With nozzle + electrode</td></tr>
+<tr><td>LGK-100 HF board (popular)</td><td>Rs. 1,355</td><td>0</td><td>514 sold, best value</td></tr>
+</table>
+<div class="w"><strong>TOTAL BUILD COST:</strong> Rs. 13,000-17,000 vs Rs. 25,000-50,000+ for new. Savings: 48-66%</div>
+</div>
+
+<div class="s" id="wiring">
+<h2>Surgical Wiring — Exact Connections</h2>
+<h3>Connection 1 — Main Power Input</h3>
+<p>220V AC live wire → Transformer primary. Use 2.5mm minimum wire. Add 30 amp fuse in series for safety.</p>
+<h3>Connection 2 — Transformer to Rectifier</h3>
+<p>Transformer secondary (50-80V AC) → Bridge rectifier input. Use 6mm minimum wire — carries full cutting current.</p>
+<h3>Connection 3 — Rectifier to Plasma Board</h3>
+<p>Rectifier POSITIVE → Plasma board DC+ input. Rectifier NEGATIVE → Ground clamp. Add 50-100A fuse.</p>
+<h3>Connection 4 — HF Board Wiring</h3>
+<p>HF board power from DC bus. HF output (15KV) → torch electrode. USE SILICONE INSULATED WIRE for high voltage.</p>
+<h3>Connection 5 — Air Solenoid Wiring</h3>
+<p>Solenoid wires → plasma board relay output. Relay switches air ON when trigger pressed.</p>
+<h3>Connection 6 — Torch Connection</h3>
+<p>Three wires: Electrode → HF output + DC positive. Nozzle → pilot arc circuit. Trigger → board trigger input.</p>
+<h3>Connection 7 — Ground Clamp</h3>
+<p>DC negative → Work piece ground. Use 10mm minimum cable — heaviest in system. Clean contact surface before clamping.</p>
+</div>
+
+<div class="s" id="soldering">
+<h2>Soldering — Power Electronics Specific</h2>
+<table>
+<tr><th>Tool</th><th>Specification</th><th>Purpose</th></tr>
+<tr><td>Soldering iron</td><td>60-80 watt minimum</td><td>Heat source</td></tr>
+<tr><td>Tip</td><td>Chisel, not pointed</td><td>Better heat transfer</td></tr>
+<tr><td>Solder wire</td><td>Lead-free, 1-1.5mm</td><td>Filler metal</td></tr>
+<tr><td>Flux paste</td><td>Rosin core</td><td>Helps solder flow</td></tr>
+<tr><td>Heat shrink</td><td>Various sizes</td><td>Insulation</td></tr>
+<tr><td>Multimeter</td><td>Continuity test</td><td>Joint verification</td></tr>
+</table>
+<h3>The 6-Step Power Joint</h3>
+<p>1. <strong>Clean</strong> — isopropyl alcohol + sandpaper<br>
+2. <strong>Tin</strong> — apply solder to wire and pad separately<br>
+3. <strong>Heat</strong> — touch both with iron for 5-8 seconds<br>
+4. <strong>Flow</strong> — solder must penetrate wire strands<br>
+5. <strong>Cool</strong> — DO NOT MOVE for 10 seconds<br>
+6. <strong>Verify</strong> — multimeter continuity test</p>
+</div>
+
+<div class="s" id="safety">
+<h2>Safety — Non Negotiable</h2>
+<div class="w"><strong>WARNING:</strong> Plasma cutting involves high voltage (15KV+), high current (50-100A), compressed air, and extreme heat. Follow all safety protocols.</div>
+<table>
+<tr><th>Feature</th><th>Purpose</th><th>Implementation</th></tr>
+<tr><td>30A primary fuse</td><td>Prevents fire</td><td>Inline fuse on live wire</td></tr>
+<tr><td>50-100A secondary fuse</td><td>Protects overcurrent</td><td>Between rectifier and board</td></tr>
+<tr><td>Air pressure switch</td><td>No arc without air</td><td>Inline with trigger</td></tr>
+<tr><td>Thermal cutoff</td><td>Prevents overheating</td><td>Mount on heat sink</td></tr>
+<tr><td>Emergency stop</td><td>Quick shutoff</td><td>Red mushroom button</td></tr>
+</table>
+</div>
+
+<div class="s" id="scrap">
+<h2>Where to Find Scrap in Kathmandu</h2>
+<table>
+<tr><th>Location</th><th>What to Ask</th><th>Price</th></tr>
+<tr><td>New Road (welding shops)</td><td>Broken TIG welders</td><td>Rs. 500-2,000</td></tr>
+<tr><td>Kantipath (repair shops)</td><td>Discarded welding machines</td><td>Free - Rs. 1,000</td></tr>
+<tr><td>Computer repair shops</td><td>Old gaming PSUs</td><td>Rs. 100-500</td></tr>
+<tr><td>Electronics scrap dealers</td><td>Power supplies, transformers</td><td>Rs. 50-200/kg</td></tr>
+<tr><td>Microwave repair shops</td><td>Microwave transformers</td><td>Rs. 100-300</td></tr>
+</table>
+</div>
+
+<div class="s" id="prompts">
+<h2>AI Image Prompts — Copy and Generate</h2>
+<p>Use these prompts with ChatGPT, Gemini, Qwen, Seedream, FLUX, or any AI image generator.</p>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 01 — TIG vs Plasma Torch</h3><pre>Technical diagram showing the difference between TIG welding torch and plasma cutting torch side by side. TIG torch has open cup nozzle with tungsten electrode, plasma torch has constricted nozzle with hafnium electrode. Clean white background, labeled parts, engineering illustration style</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 02 — Plasma Torch Cross-Section</h3><pre>Cross-section diagram of a plasma cutting torch showing internal components: hafnium electrode at center, swirl ring, constricting nozzle with small hole, compressed air flow arrows, arc channel. Technical illustration with labels, white background</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 03 — Reusable TIG Components</h3><pre>Annotated photo of a disassembled dead TIG welder showing reusable components highlighted in green: transformer, rectifier board, HF start circuit, gas solenoid, cables, ground clamp. Parts that cannot be reused highlighted in red: TIG torch. Clean workshop background</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 04 — All Components Flat Lay</h3><pre>Flat lay photo of all components needed for plasma cutter conversion: scrap TIG welder parts, HF board, plasma control board, plasma torch head, air solenoid, compressor hose, solder wire, heat shrink tubing. Organized on white background with labels</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 05 — Complete Wiring Diagram</h3><pre>Detailed wiring diagram of plasma cutter conversion showing all 7 connections: power input, transformer to rectifier, rectifier to plasma board, HF board wiring, air solenoid, torch connection, ground clamp. Color-coded wires, labeled terminals, clean technical illustration</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 06 — Soldering Tutorial</h3><pre>Step by step soldering tutorial showing 6 stages: clean surface, tin wire, tin pad, heat joint, flow solder, cool and inspect. Each stage as a separate panel with hands and soldering iron. Clean white background, numbered steps</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 07 — Safety Equipment</h3><pre>Safety equipment layout for plasma cutting: shade 10 helmet, leather gloves, ventilation fan, hearing protection, fire extinguisher, emergency stop button. Clean studio photo style with labels</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 08 — Kathmandu Scrap Map</h3><pre>Map of Kathmandu showing locations for finding scrap electronics: New Road welding shops, Kantipath repair shops, computer repair areas, electronics scrap dealers. Simple illustrated map with markers and shop names</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 09 — Before and After</h3><pre>Before and after comparison: left side shows pile of discarded TIG welders in junk shop, right side shows same components converted into working plasma cutter cutting steel. Transformation story, dramatic lighting</pre></div>
+
+<div class="pb"><button class="cb" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button><h3>Prompt 10 — Exploded View</h3><pre>Exploded view diagram of complete plasma cutter build showing all components separated but connected by dashed lines: transformer, rectifier, HF board, control board, torch, compressor, ground clamp. Technical illustration, isometric view</pre></div>
+</div>
+
+<div class="ft">
+<p>Yonjan Ventures — Making SOTA Mechanics Affordable for Nepal</p>
+<p>YonjanLabs — Open Source DIY Engineering</p>
+</div>
+</div>
+</body>
+</html>
